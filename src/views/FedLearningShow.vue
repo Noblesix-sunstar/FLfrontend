@@ -20,7 +20,7 @@
             <div style="display: inline-block">
               <p style="margin-left: 10px">Data Set</p>
               <el-select
-                v-model="value1"
+                v-model="value"
                 multiple
                 placeholder="Select"
                 style="width: 240px"
@@ -36,7 +36,7 @@
             <div style="display: inline-block">
               <p style="margin-left: 10px">Model</p>
               <el-select
-                v-model="value1"
+                v-model="value"
                 multiple
                 placeholder="Select"
                 style="width: 240px"
@@ -52,7 +52,7 @@
             <div style="display: inline-block">
               <p style="margin-left: 10px">Algorithm</p>
               <el-select
-                v-model="value1"
+                v-model="value"
                 multiple
                 placeholder="Select"
                 style="width: 240px"
@@ -71,14 +71,15 @@
               <template #header>
                 <div class="card-header">
                   <span>XXX</span>
-                  <el-button class="button" type="primary"
+                  <el-button class="button" type="primary" v-on:click="test"
                     >Operation button</el-button
                   >
                 </div>
               </template>
-              <div class="show_area">
+              <el-row>
                 <NetworkGraph :edges="edges" :nodes="nodes" />
-              </div>
+                <div id="Info">Information</div>
+              </el-row>
             </el-card>
             <el-footer>
               <el-card class="foot">
@@ -100,6 +101,8 @@
 
 <script>
 import NetworkGraph from "../components/NetworkGraph.vue";
+import { ref } from "vue";
+
 export default {
   name: "app",
   components: {
@@ -117,11 +120,39 @@ export default {
         { from: "node2", to: "node1" },
         { from: "node1", to: "node3" },
       ],
+      options: [
+        {
+          value: "Option1",
+          label: "Option1",
+        },
+        {
+          value: "Option2",
+          label: "Option2",
+        },
+        {
+          value: "Option3",
+          label: "Option3",
+        },
+        {
+          value: "Option4",
+          label: "Option4",
+        },
+        {
+          value: "Option5",
+          label: "Option5",
+        },
+      ],
+      value: ref(""),
     };
   },
-  mounted() {
-    console.log(this.nodes);
-    console.log(this.edges);
+  mounted() {},
+  methods: {
+    test() {
+      console.log("test");
+      console.log(this.nodes);
+      console.log(this.edges);
+      console.log(this.value);
+    },
   },
 };
 </script>
@@ -176,5 +207,9 @@ export default {
 }
 .results {
   margin-left: 40%;
+}
+#Info {
+  width: 200px;
+  line-height: 400px;
 }
 </style>
