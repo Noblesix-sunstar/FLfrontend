@@ -10,13 +10,13 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <div class="Top">XXXXX</div>
+          <div class="Top">Federated Learning</div>
         </el-menu>
       </el-header>
       <el-container>
         <el-container>
           <el-aside width="200px">
-            <div class="left">XXX</div>
+            <div class="left">Options</div>
             <div style="display: inline-block">
               <p style="margin-left: 10px">Data Set</p>
               <el-select
@@ -26,7 +26,7 @@
                 style="width: 240px"
               >
                 <el-option
-                  v-for="item in options"
+                  v-for="item in dataset"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -42,7 +42,7 @@
                 style="width: 240px"
               >
                 <el-option
-                  v-for="item in options"
+                  v-for="item in model"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -58,7 +58,7 @@
                 style="width: 240px"
               >
                 <el-option
-                  v-for="item in options"
+                  v-for="item in algorithm"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -120,10 +120,10 @@ export default {
         { from: "node2", to: "node1" },
         { from: "node1", to: "node3" },
       ],
-      options: [
+      dataset: [
         {
-          value: "Option1",
-          label: "Option1",
+          value: "MNIST",
+          label: "MNIST",
         },
         {
           value: "Option2",

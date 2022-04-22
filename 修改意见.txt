@@ -1,0 +1,4 @@
+xxx标题改为Feducated Learning，下面xxx先写Option嘞
+数据集先两个选择MNIST和Synthetic，Model两个选择DNN，CNN，策略两个选择FedAvg和PADP-Fed
+Informtion那里可以先显示终端个数和终端类型（如树莓派）
+这个部分标题先写Topology叭
