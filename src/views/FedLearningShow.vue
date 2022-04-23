@@ -1,102 +1,71 @@
 <template>
-  <div class="show">
-    <el-container>
-      <el-header>
-        <el-menu
-          :default-active="activeIndex"
-          class="top"
-          mode="horizontal"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
+  <p id="Top">Federated Learning</p>
+  <el-container>
+    <el-aside width="200px">
+      <div class="left">Options</div>
+      <div class="select">
+        <p style="margin-left: 10px">Data Set</p>
+        <el-select v-model="value1" placeholder="Select" style="width: 200px">
+          <el-option
+            v-for="item in dataset"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <p style="margin-left: 10px">Model</p>
+        <el-select v-model="value2" placeholder="Select" style="width: 200px">
+          <el-option
+            v-for="item in model"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <p style="margin-left: 10px">Algorithm</p>
+        <el-select v-model="value3" placeholder="Select" style="width: 200px">
+          <el-option
+            v-for="item in algorithm"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </div>
+      <div id="options_select">
+        <el-button class="button" type="primary" v-on:click="confirm"
+          >Confirm</el-button
         >
-          <div class="Top">Federated Learning</div>
-        </el-menu>
-      </el-header>
-      <el-container>
-        <el-container>
-          <el-aside width="200px">
-            <div class="left">Options</div>
-            <div style="display: inline-block">
-              <p style="margin-left: 10px">Data Set</p>
-              <el-select
-                v-model="value"
-                multiple
-                placeholder="Select"
-                style="width: 240px"
-              >
-                <el-option
-                  v-for="item in dataset"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </div>
-            <div style="display: inline-block">
-              <p style="margin-left: 10px">Model</p>
-              <el-select
-                v-model="value"
-                multiple
-                placeholder="Select"
-                style="width: 240px"
-              >
-                <el-option
-                  v-for="item in model"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </div>
-            <div style="display: inline-block">
-              <p style="margin-left: 10px">Algorithm</p>
-              <el-select
-                v-model="value"
-                multiple
-                placeholder="Select"
-                style="width: 240px"
-              >
-                <el-option
-                  v-for="item in algorithm"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </div>
-          </el-aside>
-          <el-main>
-            <el-card class="box-card">
-              <template #header>
-                <div class="card-header">
-                  <span>XXX</span>
-                  <el-button class="button" type="primary" v-on:click="test"
-                    >Operation button</el-button
-                  >
-                </div>
-              </template>
-              <el-row>
-                <NetworkGraph :edges="edges" :nodes="nodes" />
-                <div id="Info">Information</div>
-              </el-row>
-            </el-card>
-            <el-footer>
-              <el-card class="foot">
-                <div class="results">
-                  <el-row>
-                    <div>Accuracy</div>
-                    <el-divider direction="vertical" border-style="double" />
-                    <div>Loss</div>
-                  </el-row>
-                </div>
-              </el-card>
-            </el-footer>
-          </el-main>
-        </el-container>
-      </el-container>
-    </el-container>
-  </div>
+      </div>
+    </el-aside>
+    <el-main>
+      <el-card class="box-card">
+        <template #header>
+          <div class="card-header">
+            <span>Topology</span>
+            <el-button class="button" type="primary" v-on:click="test"
+              >Operation button</el-button
+            >
+          </div>
+        </template>
+        <el-row>
+          <NetworkGraph :edges="edges" :nodes="nodes" />
+          <div id="Info">显示终端个数和终端类型</div>
+        </el-row>
+      </el-card>
+      <el-footer>
+        <el-card class="foot">
+          <div class="results">
+            <el-row>
+              <div>Accuracy</div>
+              <el-divider direction="vertical" border-style="double" />
+              <div>Loss</div>
+            </el-row>
+          </div>
+        </el-card>
+      </el-footer>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -119,6 +88,7 @@ export default {
       edges: [
         { from: "node2", to: "node1" },
         { from: "node1", to: "node3" },
+        { from: "node1", to: "node4" },
       ],
       dataset: [
         {
@@ -126,23 +96,33 @@ export default {
           label: "MNIST",
         },
         {
-          value: "Option2",
-          label: "Option2",
-        },
-        {
-          value: "Option3",
-          label: "Option3",
-        },
-        {
-          value: "Option4",
-          label: "Option4",
-        },
-        {
-          value: "Option5",
-          label: "Option5",
+          value: "Synthetic",
+          label: "Synthetic",
         },
       ],
-      value: ref(""),
+      model: [
+        {
+          value: "DNN",
+          label: "DNN",
+        },
+        {
+          value: "CNN",
+          label: "CNN",
+        },
+      ],
+      algorithm: [
+        {
+          value: "FedAvg",
+          label: "FedAvg",
+        },
+        {
+          value: "PADP-Fed",
+          label: "PADP-Fed",
+        },
+      ],
+      value1: ref(""),
+      value2: ref(""),
+      value3: ref(""),
     };
   },
   mounted() {},
@@ -151,28 +131,36 @@ export default {
       console.log("test");
       console.log(this.nodes);
       console.log(this.edges);
-      console.log(this.value);
+    },
+    confirm() {
+      console.log(this.value1, this.value2, this.value3);
     },
   },
 };
 </script>
 <style scoped>
-.Top {
+#Top {
   color: azure;
   font-size: 50px;
-  margin-left: 20px;
+  margin-left: 0;
+  padding: 0%;
+  background-color: #323232e7;
+  margin-block-start: 0%;
+  margin-block-end: 0%;
+  border-radius: 0px;
 }
 .el-header {
   padding: 0%;
 }
 .el-main {
   height: 800px;
-  background-color: rgb(241, 233, 206);
+  background-color: #1e1e1e;
   padding: 0%;
 }
 .el-aside {
   width: 250px;
-  background-color: rgb(206, 227, 247);
+  background-color: #252526ee;
+  color: azure;
 }
 .el-footer {
   padding: 0%;
@@ -211,5 +199,8 @@ export default {
 #Info {
   width: 200px;
   line-height: 400px;
+}
+#options_select {
+  margin-top: 20px;
 }
 </style>

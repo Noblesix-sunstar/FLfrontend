@@ -44,8 +44,9 @@ export default {
 
 <style>
 #Graph {
-  width: 400px;
-  height: 400px;
+  width: 320px;
+  height: 320px;
   border: 2px rgb(59, 55, 55) outset;
+  margin-left: 40px;
 }
 </style>
