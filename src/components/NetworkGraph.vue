@@ -44,9 +44,17 @@ export default {
 
 <style>
 #Graph {
-  width: 320px;
-  height: 320px;
-  border: 2px rgb(59, 55, 55) outset;
-  margin-left: 40px;
+  width: 800px;
+  height: 500px;
+  border: 2px rgb(57, 57, 58) outset;
+  left: 100px;
+  top: 100px;
+  position: absolute;
+  background-color: rgb(160, 168, 148);
+}
+.vis-network {
+  position: absolute;
+  top:10%;
+  left:10%;
 }
 </style>

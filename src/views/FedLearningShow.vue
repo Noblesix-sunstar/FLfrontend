@@ -1,71 +1,56 @@
 <template>
   <p id="Top">Federated Learning</p>
-  <el-container>
-    <el-aside width="200px">
-      <div class="left">Options</div>
-      <div class="select">
-        <p style="margin-left: 10px">Data Set</p>
-        <el-select v-model="value1" placeholder="Select" style="width: 200px">
-          <el-option
-            v-for="item in dataset"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <p style="margin-left: 10px">Model</p>
-        <el-select v-model="value2" placeholder="Select" style="width: 200px">
-          <el-option
-            v-for="item in model"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <p style="margin-left: 10px">Algorithm</p>
-        <el-select v-model="value3" placeholder="Select" style="width: 200px">
-          <el-option
-            v-for="item in algorithm"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </div>
-      <div id="options_select">
-        <el-button class="button" type="primary" v-on:click="confirm"
-          >Confirm</el-button
-        >
-      </div>
-    </el-aside>
-    <el-main>
-      <el-card class="box-card">
-        <template #header>
-          <div class="card-header">
-            <span>Topology</span>
-            <el-button class="button" type="primary" v-on:click="test"
-              >Operation button</el-button
-            >
-          </div>
-        </template>
-        <el-row>
-          <NetworkGraph :edges="edges" :nodes="nodes" />
-          <div id="Info">显示终端个数和终端类型</div>
-        </el-row>
-      </el-card>
-      <el-footer>
-        <el-card class="foot">
-          <div class="results">
-            <el-row>
-              <div>Accuracy</div>
-              <el-divider direction="vertical" border-style="double" />
-              <div>Loss</div>
-            </el-row>
-          </div>
-        </el-card>
-      </el-footer>
-    </el-main>
-  </el-container>
+  <el-aside>
+    <div class="left">Options</div>
+    <div class="select">
+      <p style="margin-left: 10px">Data Set</p>
+      <el-select v-model="value1" placeholder="Select" style="width: 200px">
+        <el-option
+          v-for="item in dataset"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <p style="margin-left: 10px">Model</p>
+      <el-select v-model="value2" placeholder="Select" style="width: 200px">
+        <el-option
+          v-for="item in model"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <p style="margin-left: 10px">Algorithm</p>
+      <el-select v-model="value3" placeholder="Select" style="width: 200px">
+        <el-option
+          v-for="item in algorithm"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+    </div>
+    <div id="options_select">
+      <el-button class="button" type="primary" v-on:click="confirm"
+        >Confirm</el-button
+      >
+    </div>
+  </el-aside>
+  <el-main>
+    <div class="show">
+      <NetworkGraph :edges="edges" :nodes="nodes" />
+    </div>
+  </el-main>
+  <div class="clientInfo">
+    <div class="content">
+      <div id="results">Results</div>
+      <div id="clientnum">{{ "client number: " + num }}</div>
+      <div id="clienttype">{{ "clinet type: " + type }}</div>
+      <div id="accuracy">{{ "Accuracy: " + acc + "%" }}</div>
+      <div id="loss">{{ "Loss: " + loss + "%" }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -123,6 +108,10 @@ export default {
       value1: ref(""),
       value2: ref(""),
       value3: ref(""),
+      num: 4,
+      type: "Raspberry",
+      acc: "xx",
+      loss: "xx",
     };
   },
   mounted() {},
@@ -142,25 +131,32 @@ export default {
 #Top {
   color: azure;
   font-size: 50px;
-  margin-left: 0;
-  padding: 0%;
+  margin: 0%;
   background-color: #323232e7;
-  margin-block-start: 0%;
-  margin-block-end: 0%;
-  border-radius: 0px;
-}
-.el-header {
-  padding: 0%;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 58px;
 }
 .el-main {
   height: 800px;
   background-color: #1e1e1e;
   padding: 0%;
+  position: absolute;
+  top: 58px;
+  left: 16%;
+  width: 68%;
+  height: 100%;
 }
 .el-aside {
-  width: 250px;
+  width: 16%;
   background-color: #252526ee;
   color: azure;
+  position: absolute;
+  left: 0%;
+  height: 100%;
+  top: 58px;
 }
 .el-footer {
   padding: 0%;
@@ -196,11 +192,55 @@ export default {
 .results {
   margin-left: 40%;
 }
-#Info {
-  width: 200px;
-  line-height: 400px;
-}
 #options_select {
   margin-top: 20px;
+}
+.clientInfo {
+  text-align: left;
+  color: azure;
+  font-size: 20px;
+  height: 100%;
+  position: absolute;
+  top: 58px;
+  width: 16%;
+  right: 0%;
+  background-color: #252526ee;
+}
+.el-card_header {
+  background-color: aqua;
+}
+#Graph {
+  margin-left: 200px;
+}
+#results {
+  position: absolute;
+  top: 20px;
+  left: 20%;
+  font-size: 40px;
+}
+#clientnum {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+}
+#clienttype {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+#accuracy {
+  position: absolute;
+  top: 20%;
+  text-align: center;
+  left: 20%;
+}
+#loss {
+  position: absolute;
+  top: 25%;
+  text-align: center;
+  left: 20%;
+}
+.content{
+  font-size: 20px;
 }
 </style>
